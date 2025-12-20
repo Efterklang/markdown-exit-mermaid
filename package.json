@@ -1,6 +1,6 @@
 {
   "name": "markdown-exit-mermaid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A markdown-exit plugin for rendering Mermaid diagrams in a secure iframe with viewer controls",
   "type": "module",
   "main": "./dist/index.js",
