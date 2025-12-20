@@ -74,9 +74,9 @@ const mermaidDiagram: PluginWithOptions<MermaidOptions> =
     <div class="mermaid-view-container">
       ${girdPanelTemplate}
 
-      <div class="mermaid-content">
-         <div class="mermaid-code" style="display: none;">${code}</div>
-      </div>
+      <pre class="mermaid-content">
+         <code class="mermaid-code" style="display: none;">${code}</code>
+      </pre>
     </div>
   </div>
   ${script}
