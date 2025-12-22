@@ -8,7 +8,7 @@ export default defineConfig({
 		lib: {
 			entry: "src/index.ts",
 			name: "MarkdownExitMermaid",
-			fileName: (format) => `index.${format}.js`,
+			fileName: (format) => format === "cjs" ? "index.cjs" : "index.js",
 			formats: ["es", "cjs"],
 		},
 		rollupOptions: {
