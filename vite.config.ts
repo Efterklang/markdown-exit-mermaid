@@ -1,7 +1,7 @@
+import { transform } from "esbuild";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import { transform } from "esbuild";
 
 export default defineConfig({
 	build: {
@@ -9,10 +9,10 @@ export default defineConfig({
 			entry: "src/index.ts",
 			name: "MarkdownExitMermaid",
 			fileName: (format) => `index.${format}.js`,
-			formats: ["es","cjs"],
+			formats: ["es", "cjs"],
 		},
 		rollupOptions: {
-			external: ["markdown-exit", "node:fs", "path", "url"],
+			external: ["markdown-exit", /^node:/],
 			output: {
 				globals: {
 					"markdown-exit": "MarkdownExit",
@@ -33,15 +33,17 @@ export default defineConfig({
 					dest: "assets",
 					transform: async (content, filename) => {
 						if (filename.endsWith(".css")) {
-							return (await transform(content, { loader: "css", minify: true })).code;
+							return (await transform(content, { loader: "css", minify: true }))
+								.code;
 						}
 						if (filename.endsWith(".js")) {
-							return (await transform(content, { loader: "js", minify: true })).code;
+							return (await transform(content, { loader: "js", minify: true }))
+								.code;
 						}
 						return content;
 					},
 				},
-			]
+			],
 		}),
 	],
 });

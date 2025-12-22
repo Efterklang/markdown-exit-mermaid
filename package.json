@@ -1,44 +1,44 @@
 {
-  "name": "markdown-exit-mermaid",
-  "version": "1.0.2",
-  "description": "A markdown-exit plugin for rendering Mermaid diagrams in a secure iframe with viewer controls",
-  "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js"
-    }
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "scripts": {
-    "test": "bun ./test/test.js",
-    "build": "vite build"
-  },
-  "keywords": [
-    "markdown-exit",
-    "mermaid",
-    "diagram",
-    "plugin",
-    "markdown"
-  ],
-  "author": "GnixAij",
-  "license": "MIT",
-  "peerDependencies": {
-    "markdown-exit": "^1.0.0-beta.6"
-  },
-  "devDependencies": {
-    "@types/node": "^20.12.11",
-    "esbuild": "^0.27.2",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.0",
-    "vite-plugin-dts": "^4.5.4",
-    "vite-plugin-static-copy": "^3.1.4"
-  }
+	"name": "markdown-exit-mermaid",
+	"version": "1.0.2",
+	"description": "A markdown-exit plugin for rendering Mermaid diagrams in a secure iframe with viewer controls",
+	"type": "module",
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.es.js",
+			"require": "./dist/index.cjs.js"
+		}
+	},
+	"files": [
+		"dist",
+		"README.md"
+	],
+	"scripts": {
+		"test": "bun ./test/test.js",
+		"build": "vite build"
+	},
+	"keywords": [
+		"markdown-exit",
+		"mermaid",
+		"diagram",
+		"plugin",
+		"markdown"
+	],
+	"author": "GnixAij",
+	"license": "MIT",
+	"peerDependencies": {
+		"markdown-exit": "^1.0.0-beta.6"
+	},
+	"devDependencies": {
+		"@types/node": "^20.12.11",
+		"esbuild": "^0.27.2",
+		"typescript": "^5.9.3",
+		"vite": "^7.3.0",
+		"vite-plugin-dts": "^4.5.4",
+		"vite-plugin-static-copy": "^3.1.4"
+	}
 }

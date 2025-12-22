@@ -1,9 +1,7 @@
-window.initMermaidDiagram = (id, jsUrl, theme) => {
+window.initMermaidDiagram = (id, jsUrl, theme, themeVariables) => {
 	const container = document.getElementById(id);
 	if (!container) return;
-	const viewContainer = container.querySelector(
-		".mermaid-view-container",
-	);
+	const viewContainer = container.querySelector(".mermaid-view-container");
 	const content = container.querySelector(".mermaid-content");
 	const codeElement = container.querySelector(".mermaid-code");
 	const toolbar = container.querySelector(".mermaid-toolbar");
@@ -43,6 +41,7 @@ window.initMermaidDiagram = (id, jsUrl, theme) => {
 		mermaid.initialize({
 			startOnLoad: false,
 			theme: theme,
+			themeVariables: themeVariables,
 			securityLevel: "strict",
 			fontSize: 16,
 			flowchart: {
@@ -58,14 +57,16 @@ window.initMermaidDiagram = (id, jsUrl, theme) => {
 		mermaid
 			.render(svgId, code)
 			.then(({ svg }) => {
-				content.insertAdjacentHTML('beforeend', svg);
+				content.insertAdjacentHTML("beforeend", svg);
 			})
 			.catch((error) => {
 				console.error("Mermaid rendering error:", error);
-				content.insertAdjacentHTML('beforeend',
+				content.insertAdjacentHTML(
+					"beforeend",
 					'<p style="color: red;">Failed to render diagram: ' +
-					error.message +
-					"</p>");
+						error.message +
+						"</p>",
+				);
 			});
 	});
 

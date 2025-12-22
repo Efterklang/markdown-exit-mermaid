@@ -1,8 +1,8 @@
-import type { MarkdownExit, PluginWithOptions } from "markdown-exit";
 import { readFileSync } from "node:fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import {girdPanelTemplate,toolbarTemplate} from "./html_template";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import type { MarkdownExit, PluginWithOptions } from "markdown-exit";
+import { girdPanelTemplate, toolbarTemplate } from "./html_template";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,6 +21,7 @@ interface MermaidOptions {
 	js_url?: string;
 	css_url?: string;
 	viewer_js_url?: string;
+	theme_variables?: Record<string, string>;
 }
 
 const mermaidDiagram: PluginWithOptions<MermaidOptions> =
@@ -61,7 +62,7 @@ const mermaidDiagram: PluginWithOptions<MermaidOptions> =
         if (!window.initMermaidDiagram) {
           ${viewerScript}
         }
-        window.initMermaidDiagram('${id}', '${jsUrl}', '${theme}');
+        window.initMermaidDiagram('${id}', '${jsUrl}', '${theme}', ${JSON.stringify(options.theme_variables || {})});
       </script>`;
 			}
 
