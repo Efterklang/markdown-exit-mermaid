@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { MarkdownExit, PluginWithOptions } from "markdown-exit";
@@ -7,12 +7,17 @@ import { girdPanelTemplate, toolbarTemplate } from "./html_template";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+let assetsDir = path.join(__dirname, "assets");
+if (!existsSync(assetsDir)) {
+	assetsDir = path.join(__dirname, "../assets");
+}
+
 const viewerScript = readFileSync(
-	path.join(__dirname, "assets", "viewer.js"),
+	path.join(assetsDir, "viewer.js"),
 	"utf-8",
 );
 const scopedStyles = readFileSync(
-	path.join(__dirname, "assets", "style.css"),
+	path.join(assetsDir, "style.css"),
 	"utf-8",
 );
 

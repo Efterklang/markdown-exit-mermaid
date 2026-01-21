@@ -2,8 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { MarkdownExit } from "markdown-exit";
-// @ts-ignore
-import mermaidDiagram from "../dist/index.js";
+import mermaidDiagram from "../src/index.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -66,7 +65,7 @@ sequenceDiagram
   });
 
   const htmlOnly = mdHtmlOnly.render(testMarkdown);
-  
+
   const hasScript = htmlOnly.includes("<script");
   const hasStyle = htmlOnly.includes("<style") || htmlOnly.includes("<link rel=\"stylesheet\"");
 
