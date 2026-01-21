@@ -22,6 +22,7 @@ interface MermaidOptions {
 	css_url?: string;
 	viewer_js_url?: string;
 	theme_variables?: Record<string, string>;
+	html_only?: boolean;
 }
 
 const mermaidDiagram: PluginWithOptions<MermaidOptions> =
@@ -68,7 +69,7 @@ const mermaidDiagram: PluginWithOptions<MermaidOptions> =
 
 			const containerHtml = `
 <div id="${id}" class="mermaid-container">
-  ${css}
+  ${options.html_only ? "" : css}
   <div class="mermaid-wrapper">
 	${toolbarTemplate}
 
@@ -80,7 +81,7 @@ const mermaidDiagram: PluginWithOptions<MermaidOptions> =
       </pre>
     </div>
   </div>
-  ${script}
+  ${options.html_only ? "" : script}
 </div>`;
 
 			return containerHtml;

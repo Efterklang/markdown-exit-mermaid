@@ -18,8 +18,8 @@
 		"README.md"
 	],
 	"scripts": {
-		"test": "bun ./test/test.js",
-		"build": "vite build"
+		"test": "bun ./test/test.ts",
+		"build": "vite build && bun ./scripts/build-loader.ts"
 	},
 	"keywords": [
 		"markdown-exit",
@@ -34,7 +34,7 @@
 		"markdown-exit": "^1.0.0-beta.6"
 	},
 	"devDependencies": {
-		"@types/node": "^20.12.11",
+		"@types/node": "^25.0.3",
 		"esbuild": "^0.27.2",
 		"typescript": "^5.9.3",
 		"vite": "^7.3.0",
