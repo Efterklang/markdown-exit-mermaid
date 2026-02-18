@@ -1,31 +1,30 @@
 # markdown-exit-mermaid
 
-A markdown-exit plugin that renders [Mermaid](https://mermaid.js.org/) diagrams with an interactive viewer and control panel.
+A markdown-exit plugin that renders [Mermaid](https://mermaid.js.org/) diagrams as SVGs using [beautiful-mermaid](https://github.com/lukilabs/beautiful-mermaid).
 
 ## ✨ Features
 
-- 🎨 Interactive diagram viewer with pan and zoom controls
-- 📋 One-click code copy functionality
-- 🎯 Grid-based navigation panel for precise diagram positioning
-- 🔒 Secure rendering with Mermaid's strict security level
-- 🎭 Customizable theme support
-- 📦 Self-contained or CDN-based asset loading
+- 🎨 15+ built-in beautiful themes
+- 🖼️ Server-side SVG rendering (no browser dependency)
+- 📦 Zero runtime initialization
+- 🎯 Full theme customization
+- 🔒 Secure rendering
 - 🚀 Zero configuration required - works out of the box
 
 ## 📦 Installation
 
 ```bash
 # Using bun
-bun add markdown-exit-mermaid
+bun add markdown-exit-mermaid beautiful-mermaid
 
 # Using npm
-npm install markdown-exit-mermaid
+npm install markdown-exit-mermaid beautiful-mermaid
 
 # Using yarn
-yarn add markdown-exit-mermaid
+yarn add markdown-exit-mermaid beautiful-mermaid
 
 # Using pnpm
-pnpm add markdown-exit-mermaid
+pnpm add markdown-exit-mermaid beautiful-mermaid
 ```
 
 ## 🚀 Usage
@@ -56,74 +55,91 @@ const html = md.render(markdown);
 
 ```javascript
 md.use(mermaidPlugin, {
-  theme: 'dark',                    // Mermaid theme (default: 'default')
-  js_url: 'https://cdn.custom.com/mermaid.js',  // Custom Mermaid JS URL
-  css_url: 'https://cdn.custom.com/style.css',  // External CSS URL
-  viewer_js_url: 'https://cdn.custom.com/viewer.js'  // External viewer JS URL
+  theme: 'tokyo-night',          // beautiful-mermaid theme name
+  bg: '#1a1a1a',                  // Override background color
+  fg: '#e0e0e0',                  // Override foreground color
+  accent: '#4f46e5',              // Override accent color
+  html_only: true                 // Return SVG only (no wrapper div)
 });
 ```
 
 ## ⚙️ Options
 
-| Option          | Type     | Default                                                         | Description                                                                                                                                                      |
-| --------------- | -------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `theme`         | `string` | `'default'`                                                     | Mermaid theme name. See[Mermaid themes](https://mermaid.js.org/config/theming.html) for available options (e.g., `'default'`, `'dark'`, `'forest'`, `'neutral'`) |
-| `js_url`        | `string` | `'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js'` | URL to load Mermaid.js library from                                                                                                                              |
-| `css_url`       | `string` | `undefined`                                                     | Optional external CSS URL. If not provided, inline styles are used                                                                                               |
-| `viewer_js_url` | `string` | `undefined`                                                     | Optional external viewer script URL. If not provided, inline viewer script is used                                                                               |
+| Option            | Type      | Default               | Description                                                                                     |
+| ----------------- | --------- | --------------------- | ----------------------------------------------------------------------------------------------- |
+| `theme`           | `string`  | `'zinc-light'`        | Theme name (see [Themes](#themes) section)                                                      |
+| `bg`              | `string`  | theme-specific        | Override background color                                                                      |
+| `fg`              | `string`  | theme-specific        | Override foreground color                                                                      |
+| `line`            | `string`  | theme-specific        | Override line color                                                                           |
+| `accent`          | `string`  | theme-specific        | Override accent color                                                                         |
+| `muted`           | `string`  | theme-specific        | Override muted color                                                                          |
+| `surface`         | `string`  | theme-specific        | Override surface color                                                                        |
+| `border`          | `string`  | theme-specific        | Override border color                                                                         |
+| `font`            | `string`  | theme-specific        | Override font family                                                                          |
+| `padding`         | `number`  | theme-specific        | Override padding value                                                                        |
+| `nodeSpacing`     | `number`  | theme-specific        | Override node spacing                                                                         |
+| `layerSpacing`    | `number`  | theme-specific        | Override layer spacing                                                                        |
+| `html_only`       | `boolean` | `false`               | Return SVG only without wrapper div                                                            |
+| `transparent`     | `boolean` | `false`               | Make SVG background transparent                                                               |
 
-## 🎮 Interactive Controls
+## 🎨 Themes
 
-The rendered diagrams include an interactive control panel with the following features:
+beautiful-mermaid comes with 15+ built-in themes:
 
-### Navigation
-
-- **Arrow buttons** (↑ ↓ ← →): Pan the diagram in all directions
-- **Reset button** (⟳): Reset view to original position and scale
-
-### Zoom
-
-- **Zoom In** (+): Increase diagram scale up to 5x
-- **Zoom Out** (−): Decrease diagram scale down to 0.2x
-
-### Toolbar
-
-- **Copy button** (📋): Copy the original Mermaid code to🔧 Advanced Configuration
-
-### Using Custom CDN
-
-```javascript
-md.use(mermaidPlugin, {
-  js_url: 'https://unpkg.com/mermaid@11/dist/mermaid.min.js'
-});
-```
-
-### External Assets for Better Caching
-
-If you're rendering multiple pages, you can host the viewer script and styles externally to improve caching:
-
-```javascript
-md.use(mermaidPlugin, {
-  css_url: 'https://your-cdn.com/mermaid-viewer.css',
-  viewer_js_url: 'https://your-cdn.com/mermaid-viewer.js'
-});
-```
+- **Light Themes**: `zinc-light`, `nord-light`, `github-light`
+- **Dark Themes**: `zinc-dark`, `tokyo-night`, `tokyo-night-storm`, `catppuccin-mocha`, `nord`, `dracula`, `github-dark`, `rose-pine-moon`, `rose-pine-dawn`
+- **More**: Check [beautiful-mermaid](https://github.com/lukilabs/beautiful-mermaid) for the full list
 
 ### Dark Theme Example
 
 ```javascript
 md.use(mermaidPlugin, {
-  theme: 'dark'
+  theme: 'tokyo-night'
+});
+```
+
+### Custom Theme Example
+
+```javascript
+md.use(mermaidPlugin, {
+  theme: 'zinc-light',
+  bg: '#ffffff',
+  fg: '#000000',
+  accent: '#2563eb',
+  border: '#e5e7eb'
+});
+```
+
+## 🔧 Advanced Configuration
+
+### SVG-Only Output
+
+If you only want the SVG without any wrapper:
+
+```javascript
+md.use(mermaidPlugin, {
+  html_only: true
+});
+```
+
+This is useful when you want full control over the SVG container styling.
+
+### Transparent Background
+
+For transparent SVGs (useful for embedding):
+
+```javascript
+md.use(mermaidPlugin, {
+  transparent: true
 });
 ```
 
 ## 🏗️ How It Works
 
 1. **Code Block Detection**: The plugin intercepts fenced code blocks with `mermaid` language
-2. **HTML Generation**: Creates a container with control panel, toolbar, and viewer area
-3. **Mermaid Loading**: Dynamically loads Mermaid.js library (cached after first load)
-4. **Diagram Rendering**: Uses Mermaid's `render()` API to convert code to SVG
-5. **Interactive Controls**: Attaches event listeners for pan, zoom, and copy functionality
+2. **SVG Rendering**: Uses beautiful-mermaid's `renderMermaid()` API to convert code to SVG server-side
+3. **Theme Application**: Applies the selected theme with any custom overrides
+4. **HTML Output**: Wraps the SVG in a div (unless `html_only` is true)
 
 ## 📄 License
 

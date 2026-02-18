@@ -12,10 +12,11 @@ export default defineConfig({
 			formats: ["es", "cjs"],
 		},
 		rollupOptions: {
-			external: ["markdown-exit", /^node:/],
+			external: ["markdown-exit", "beautiful-mermaid", /^node:/],
 			output: {
 				globals: {
 					"markdown-exit": "MarkdownExit",
+					"beautiful-mermaid": "BeautifulMermaid",
 				},
 			},
 		},
