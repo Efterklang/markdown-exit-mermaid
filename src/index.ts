@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { MarkdownExit, PluginWithOptions } from "markdown-exit";
@@ -12,14 +12,8 @@ if (!existsSync(assetsDir)) {
 	assetsDir = path.join(__dirname, "../assets");
 }
 
-const viewerScript = readFileSync(
-	path.join(assetsDir, "viewer.js"),
-	"utf-8",
-);
-const scopedStyles = readFileSync(
-	path.join(assetsDir, "style.css"),
-	"utf-8",
-);
+const viewerScript = readFileSync(path.join(assetsDir, "viewer.js"), "utf-8");
+const scopedStyles = readFileSync(path.join(assetsDir, "style.css"), "utf-8");
 
 interface MermaidOptions {
 	theme?: string;
@@ -45,7 +39,6 @@ const mermaidDiagram: PluginWithOptions<MermaidOptions> =
 
 			const info = (token.info || "").trim();
 			const lang = info.split(/\s+/)[0];
-			const code = escapeHtml(token.content) || "";
 
 			if (lang !== "mermaid") {
 				// 非 mermaid 使用原始渲染器
@@ -54,6 +47,7 @@ const mermaidDiagram: PluginWithOptions<MermaidOptions> =
 					: self.renderToken(tokens, idx, _opts);
 			}
 
+			const code = escapeHtml(token.content) || "";
 			const id = `mermaid-${Math.random().toString(36).slice(2)}`;
 
 			const css = options.css_url
