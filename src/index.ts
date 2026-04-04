@@ -4,12 +4,11 @@ import { fileURLToPath } from "node:url";
 import type { MarkdownExit, PluginWithOptions } from "markdown-exit";
 import { girdPanelTemplate, toolbarTemplate } from "./html_template";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirnameCJS = typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
-let assetsDir = path.join(__dirname, "assets");
+let assetsDir = path.join(__dirnameCJS, "assets");
 if (!existsSync(assetsDir)) {
-	assetsDir = path.join(__dirname, "../assets");
+	assetsDir = path.join(__dirnameCJS, "../assets");
 }
 
 const viewerScript = readFileSync(path.join(assetsDir, "viewer.js"), "utf-8");

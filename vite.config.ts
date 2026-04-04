@@ -30,7 +30,7 @@ export default defineConfig({
 			targets: [
 				{
 					src: "assets/*",
-					dest: "assets",
+					dest: "",
 					transform: async (content, filename) => {
 						if (filename.endsWith(".css")) {
 							return (await transform(content, { loader: "css", minify: true }))
